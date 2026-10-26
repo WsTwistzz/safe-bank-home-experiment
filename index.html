@@ -457,6 +457,134 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .callout th,.callout td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
 .callout th{font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .callout td:first-child{font-weight:600;white-space:nowrap}
+
+/* ============================================================
+   卡片库 · 沿用 C 版 token 扩展的 8 张卡片
+   只在 .clib 作用域内，不影响上方六列对比
+   ============================================================ */
+.clib{--lb-bg:#F1F2EF;--lb-soft:#ECEDE9;--lb-line:rgba(17,19,24,.08);
+  --lb-shadow:0 18px 32px -25px rgba(17,19,24,.34),0 2px 5px -2px rgba(17,19,24,.05)}
+.clib-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:20px;align-items:start}
+@media (max-width:1300px){.clib-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.clib-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* 单卡外框：卡片按真实 375 屏内的 343 宽呈现，不随栅格拉伸 */
+.cwrap{display:flex;flex-direction:column;gap:9px;min-width:0}
+.cstage{background:var(--lb-bg);border-radius:26px;padding:16px;
+  box-shadow:inset 0 0 0 1px rgba(17,19,24,.04);
+  display:flex;justify-content:center}
+/* 真机宽度约束：所有卡片都是这个宽度 */
+.cstage > .card{width:343px;max-width:100%}
+.cwrap .ctitle{font:650 10px var(--mono);letter-spacing:.1em;color:var(--copper);text-transform:uppercase}
+.cwrap .cdesc{font-size:11px;color:var(--muted);line-height:1.5;margin:-4px 0 2px}
+.cstage{background:var(--lb-bg);border-radius:26px;padding:16px;box-shadow:inset 0 0 0 1px rgba(17,19,24,.04)}
+
+/* 通用卡：白底 + 大圆角 + 短距低透明阴影 */
+.card{position:relative;overflow:hidden;background:#fff;border-radius:24px;padding:14px;
+  box-shadow:var(--lb-shadow)}
+.card + .card{margin-top:12px}
+.card-t{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card-t b{font-size:11px;font-weight:700;letter-spacing:-.02em}
+.lbl{font:600 6.6px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.big{font-size:31px;font-weight:700;line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.big small{font-size:.5em;font-weight:500;color:var(--muted);letter-spacing:-.02em}
+.sub{font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums}
+.gobtn{width:21px;height:21px;border-radius:50%;background:var(--lb-soft);color:var(--ink);
+  display:grid;place-items:center;flex:0 0 auto}
+.gobtn .ic{width:10px;height:10px;stroke-width:1.9}
+.soft{background:var(--lb-soft);border-radius:16px}
+.blackbtn{height:34px;padding:0 13px;border-radius:13px;background:var(--ink);color:#fff;
+  display:inline-flex;align-items:center;gap:5px;font-size:8px;font-weight:650;white-space:nowrap;
+  box-shadow:0 8px 14px -9px rgba(17,19,24,.8)}
+.blackbtn .ic{width:11px;height:11px}
+.iconbox{width:30px;height:30px;border-radius:10px;background:var(--lb-soft);
+  display:grid;place-items:center;flex:0 0 auto}
+.iconbox .ic{width:15px;height:15px;stroke-width:1.7}
+.iconbox.dark{background:var(--ink);color:#fff}
+.divider{height:1px;background:var(--lb-line);border:0;margin:0}
+
+/* 1 · 月度支出：7 日柱图（细柱，不拉伸） */
+.bars{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:50px;margin-top:12px}
+.bars i{flex:1;max-width:18px;border-radius:5px;background:var(--lb-soft)}
+.bars i.hi{background:var(--ink)}
+.bars-x{display:flex;justify-content:space-between;gap:8px;margin-top:7px}
+.bars-x span{flex:1;max-width:18px;text-align:center;font:500 6.4px var(--mono);color:var(--muted)}
+.cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px;padding-top:11px;
+  border-top:1px solid var(--lb-line)}
+.cats div{padding:0 7px}
+.cats div + div{border-left:1px solid var(--lb-line)}
+.cats b{display:block;margin-top:3px;font-size:12px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.wmark{position:absolute;left:9px;top:-4px;font-size:38px;font-weight:800;line-height:1;
+  letter-spacing:-.04em;color:rgba(17,19,24,.035);pointer-events:none;white-space:nowrap}
+
+/* 2 · 储蓄目标：细进度条 */
+.track{height:6px;border-radius:999px;background:var(--lb-soft);overflow:hidden;margin-top:11px}
+.track i{display:block;height:100%;border-radius:999px;background:var(--ink)}
+.pct{font-size:38px;font-weight:800;line-height:1;letter-spacing:-.055em}
+.pct span{font-size:.42em;font-weight:600;margin-left:2px}
+
+/* 3 · 资产分布：分段条 */
+.stack{display:flex;height:9px;border-radius:999px;overflow:hidden;margin-top:12px;background:var(--lb-soft)}
+.stack i{display:block;height:100%}
+.stack i.a{background:var(--ink)}
+.stack i.b{background:#8A8C86}
+.stack i.c{background:#C9CBC4}
+
+/* 4 · 收益走势 */
+.sparkline{display:block;width:100%;height:52px;margin-top:10px;fill:none;
+  stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sparkfill{fill:rgba(17,19,24,.055);stroke:none}
+
+/* 5 · 时间线 */
+.tl{margin-top:11px}
+.tl-row{display:grid;grid-template-columns:38px 1px minmax(0,1fr) auto;column-gap:10px;align-items:center}
+.tl-date{font:600 6.4px var(--mono);color:var(--muted);text-align:right;line-height:1.3}
+.tl-line{position:relative;align-self:stretch;background:var(--lb-line);width:1px;justify-self:center}
+.tl-dot{position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;
+  border-radius:50%;background:var(--ink)}
+.tl-main{padding:8px 0}
+.tl-main b{display:block;font-size:9.6px;font-weight:650;line-height:1.25}
+.tl-main small{display:block;font-size:6.8px;color:var(--muted);margin-top:1px}
+.tl-amt{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* 6 · 银行卡（1.62:1 真实卡比例，不用 aspect-ratio 以免被 flex 拉伸） */
+.bankcard{position:relative;overflow:hidden;border-radius:18px;background:var(--ink);color:#fff;
+  height:186px;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.bankcard .bc-top{display:flex;align-items:center;justify-content:space-between}
+.bankcard .lbl{color:rgba(255,255,255,.55)}
+.bankcard .bc-no{font:600 13px var(--mono);letter-spacing:.1em}
+.bankcard .bc-ring{position:absolute;right:-30px;bottom:-38px;width:112px;height:112px;border-radius:50%;
+  border:7px solid rgba(255,255,255,.13)}
+.bankcard .bc-chip{width:22px;height:16px;border-radius:4px;background:rgba(255,255,255,.22)}
+.bc-row{display:flex;align-items:center;gap:9px;margin-top:12px}
+.bc-row .iconbox{width:28px;height:28px;border-radius:9px}
+
+/* 7 · 现金流双柱（细柱，不拉伸；高度按真实收支比例） */
+.pairs{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:56px;margin-top:14px}
+.pairs .p{flex:1;max-width:34px;display:flex;align-items:flex-end;justify-content:center;gap:3px;height:100%}
+.pairs .p i{width:8px;border-radius:4px}
+.pairs .p i.inc{background:var(--ink)}
+.pairs .p i.exp{background:#C9CBC4}
+.pairs-x{display:flex;justify-content:space-between;gap:12px;margin-top:7px}
+.pairs-x span{flex:1;max-width:34px;text-align:center;font:500 6.4px var(--mono);color:var(--muted)}
+.split{display:grid;grid-template-columns:1fr 1fr;margin-top:12px;padding-top:11px;border-top:1px solid var(--lb-line)}
+.split div{padding:0 8px}
+.split div + div{border-left:1px solid var(--lb-line)}
+.split b{display:block;margin-top:3px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* 8 · 安全 */
+.checks{margin-top:11px}
+.check{display:flex;align-items:center;gap:9px;padding:8px 0}
+.check + .check{border-top:1px solid var(--lb-line)}
+.check .ck{width:17px;height:17px;border-radius:50%;background:var(--ink);color:#fff;
+  display:grid;place-items:center;flex:0 0 auto}
+.check .ck .ic{width:9px;height:9px;stroke-width:2.6}
+.check .cm{flex:1;min-width:0}
+.check .cm b{display:block;font-size:9.4px;font-weight:650}
+.check .cm small{display:block;font-size:6.8px;color:var(--muted);margin-top:1px}
+.shieldwmark{position:absolute;right:-16px;bottom:-20px;width:104px;height:104px;
+  color:rgba(17,19,24,.04);pointer-events:none}
+.shieldwmark .ic{width:100%;height:100%;stroke-width:1.2}
 @media (max-width:1080px){.stage{grid-template-columns:1fr;gap:40px}.wrap{padding:28px 18px 60px}}
 </style>
 </head>
@@ -1018,9 +1146,255 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
       </tbody>
     </table>
   </div>
-</div>
 
-<!-- 图标 sprite -->
+  <!-- ═══════════ 卡片库 · 沿用 C 版 token 扩展 ═══════════ -->
+  <div class="callout clib">
+    <h3>卡片库 · 沿用 C 版 token 扩展的 8 张卡片</h3>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 4px">与 C 版共用同一套 token：背景 <code style="font:500 11px var(--mono)">#F1F2EF</code>、内嵌面板 <code style="font:500 11px var(--mono)">#ECEDE9</code>、圆角 24px、短距低透明阴影。每张卡按 375 屏内 343 宽呈现（左右 16 边距）。<b>全部黑白灰，涨跌与合规语义均不使用红绿。</b></p>
+
+    <div class="clib-grid">
+
+      <!-- 1 · 月度支出 -->
+      <div class="cwrap">
+        <span class="ctitle">01 · Monthly spending</span>
+        <p class="cdesc">月度支出分析：大数字 + 7 日柱图 + 三栏分类。只把最高的一天填黑，其余浅灰分层。</p>
+        <div class="cstage">
+          <div class="card">
+            <span class="wmark">SPENDING</span>
+            <div class="card-t" style="position:relative;z-index:1">
+              <span class="lbl">Monthly spending · 10 月</span>
+              <span class="gobtn"><svg class="ic"><use href="#i-chev"/></svg></span>
+            </div>
+            <div class="big" style="margin-top:9px;position:relative;z-index:1">¥1,486<small>.24</small></div>
+            <div class="bars">
+              <i style="height:38%"></i><i style="height:54%"></i><i style="height:30%"></i>
+              <i class="hi" style="height:96%"></i><i style="height:62%"></i><i style="height:44%"></i>
+              <i style="height:50%"></i>
+            </div>
+            <div class="bars-x"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+            <div class="cats">
+              <div><span class="lbl">餐饮</span><b>¥532.00</b></div>
+              <div><span class="lbl">交通</span><b>¥268.40</b></div>
+              <div><span class="lbl">购物</span><b>¥685.84</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 · 储蓄目标 -->
+      <div class="cwrap">
+        <span class="ctitle">02 · Savings goal</span>
+        <p class="cdesc">储蓄目标：以 68% 为唯一焦点，细黑进度条 + 内嵌浅灰面板放自动储蓄说明。</p>
+        <div class="cstage">
+          <div class="card">
+            <div class="card-t">
+              <span class="lbl">Savings goal</span>
+              <span class="iconbox"><svg class="ic"><use href="#i-shield"/></svg></span>
+            </div>
+            <div class="pct" style="margin-top:10px">68<span>%</span></div>
+            <div class="sub" style="margin-top:6px">应急基金 · ¥13,600 / ¥20,000</div>
+            <div class="track"><i style="width:68%"></i></div>
+            <div class="soft" style="margin-top:12px;padding:10px 11px;display:flex;align-items:center;gap:9px">
+              <span class="iconbox" style="background:#fff"><svg class="ic"><use href="#i-clock"/></svg></span>
+              <div>
+                <b style="display:block;font-size:9.4px;font-weight:650">每月自动储蓄 ¥800</b>
+                <small style="display:block;font-size:6.8px;color:var(--muted);margin-top:1px">下次扣款 11-01 · 随时可停</small>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:12px">
+              <span class="blackbtn">追加储蓄<svg class="ic"><use href="#i-plus"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 · 资产分布 -->
+      <div class="cwrap">
+        <span class="ctitle">03 · Asset allocation</span>
+        <p class="cdesc">资产分布：黑 / 中灰 / 浅灰三段横条，下方三栏金额占比。不用饼图与环形图。</p>
+        <div class="cstage">
+          <div class="card">
+            <div class="card-t">
+              <span class="lbl">Asset allocation</span>
+              <span class="gobtn"><svg class="ic"><use href="#i-chev"/></svg></span>
+            </div>
+            <div class="big" style="margin-top:9px">¥26,000<small>.00</small></div>
+            <div class="stack">
+              <i class="a" style="width:23%"></i><i class="b" style="width:54%"></i><i class="c" style="width:23%"></i>
+            </div>
+            <div class="cats">
+              <div><span class="lbl">活期 · 23%</span><b>¥6,000</b></div>
+              <div><span class="lbl">储蓄 · 54%</span><b>¥14,000</b></div>
+              <div><span class="lbl">定期 · 23%</span><b>¥6,000</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 · 理财收益 -->
+      <div class="cwrap">
+        <span class="ctitle">04 · Portfolio performance</span>
+        <p class="cdesc">收益走势：+2.4% <b>用黑色不用绿</b>，细黑走势线 + 极浅灰填充，无网格无坐标轴。</p>
+        <div class="cstage">
+          <div class="card">
+            <div class="card-t">
+              <span class="lbl">Portfolio · 近 30 天</span>
+              <span class="gobtn"><svg class="ic"><use href="#i-chev"/></svg></span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:6px;margin-top:9px">
+              <span class="big" style="font-size:26px">+2.4%</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 311 52" preserveAspectRatio="none" aria-hidden="true">
+              <path class="sparkfill" d="M0 40 L26 36 L52 38 L78 30 L104 33 L130 25 L156 27 L182 19 L208 22 L234 14 L260 17 L286 9 L311 11 V52 H0 Z"/>
+              <path d="M0 40 L26 36 L52 38 L78 30 L104 33 L130 25 L156 27 L182 19 L208 22 L234 14 L260 17 L286 9 L311 11"/>
+            </svg>
+            <div class="cats">
+              <div><span class="lbl">累计收益</span><b>+¥420</b></div>
+              <div><span class="lbl">最佳单日</span><b>+¥36</b></div>
+              <div><span class="lbl">波动率</span><b>0.8%</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 · 待扣款 -->
+      <div class="cwrap">
+        <span class="ctitle">05 · Upcoming payments</span>
+        <p class="cdesc">待扣款时间线：日期块 + 细黑点竖线，强调「日期 → 项目 → 金额」的阅读顺序。</p>
+        <div class="cstage">
+          <div class="card">
+            <div class="card-t">
+              <span class="lbl">Upcoming payments</span>
+              <span class="iconbox"><svg class="ic"><use href="#i-clock"/></svg></span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:6px;margin-top:9px">
+              <span class="big" style="font-size:26px">¥45<small>.00</small></span>
+              <span class="sub">7 天内待扣</span>
+            </div>
+            <div class="tl">
+              <div class="tl-row">
+                <span class="tl-date">10-27<br>周一</span>
+                <span class="tl-line"><i class="tl-dot"></i></span>
+                <span class="tl-main"><b>流媒体会员</b><small>订阅 · 每月</small></span>
+                <span class="tl-amt">¥15.00</span>
+              </div>
+              <div class="tl-row">
+                <span class="tl-date">10-30<br>周四</span>
+                <span class="tl-line"><i class="tl-dot"></i></span>
+                <span class="tl-main"><b>云服务存储</b><small>订阅 · 每月</small></span>
+                <span class="tl-amt">¥30.00</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:8px">
+              <span class="blackbtn">管理扣款<svg class="ic"><use href="#i-chev"/></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 · 银行卡管理 -->
+      <div class="cwrap">
+        <span class="ctitle">06 · My cards</span>
+        <p class="cdesc">银行卡管理：抽象纯黑白卡面（无彩色、无金属质感）+ 账号信息 + 两个轻量入口。</p>
+        <div class="cstage">
+          <div class="card">
+            <div class="bankcard">
+              <span class="bc-ring"></span>
+              <div class="bc-top">
+                <span class="lbl">Safe Bank · Everyday</span>
+                <span class="bc-chip"></span>
+              </div>
+              <div style="position:relative;z-index:1">
+                <div class="sub" style="color:rgba(255,255,255,.5);margin-bottom:5px">CARD NUMBER</div>
+                <div class="bc-no">•••• •••• •••• 2864</div>
+              </div>
+            </div>
+            <div class="bc-row">
+              <span class="iconbox"><svg class="ic"><use href="#i-card"/></svg></span>
+              <div style="flex:1;min-width:0">
+                <b style="display:block;font-size:9.6px;font-weight:650">Everyday 账户</b>
+                <small style="display:block;font-size:6.8px;color:var(--muted);margin-top:1px">状态正常 · 可用余额 ¥6,000.00</small>
+              </div>
+              <span class="blackbtn" style="height:28px;padding:0 10px;border-radius:11px">管理</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 · 月度现金流 -->
+      <div class="cwrap">
+        <span class="ctitle">07 · Cash flow</span>
+        <p class="cdesc">月度现金流：收入填黑、支出填浅灰，六周双柱对比。不使用红绿语义色。</p>
+        <div class="cstage">
+          <div class="card">
+            <div class="card-t">
+              <span class="lbl">Cash flow · 10 月</span>
+              <span class="gobtn"><svg class="ic"><use href="#i-chev"/></svg></span>
+            </div>
+            <div class="big" style="margin-top:9px">+¥3,280<small>.00</small></div>
+            <div class="sub" style="margin-top:5px">本月结余</div>
+            <div class="pairs">
+              <span class="p"><i class="inc" style="height:54%"></i><i class="exp" style="height:36%"></i></span>
+              <span class="p"><i class="inc" style="height:68%"></i><i class="exp" style="height:45%"></i></span>
+              <span class="p"><i class="inc" style="height:42%"></i><i class="exp" style="height:28%"></i></span>
+              <span class="p"><i class="inc" style="height:82%"></i><i class="exp" style="height:55%"></i></span>
+              <span class="p"><i class="inc" style="height:60%"></i><i class="exp" style="height:40%"></i></span>
+              <span class="p"><i class="inc" style="height:92%"></i><i class="exp" style="height:62%"></i></span>
+            </div>
+            <div class="pairs-x"><span>第1周</span><span>2</span><span>3</span><span>4</span><span>5</span><span>本周</span></div>
+            <div class="split">
+              <div><span class="lbl">收入</span><b>+¥9,850.00</b></div>
+              <div><span class="lbl">支出</span><b>−¥6,570.00</b></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:10px;padding-top:9px;border-top:1px solid var(--lb-line)">
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:6.8px;color:var(--muted)">
+                <i style="width:7px;height:7px;border-radius:2px;background:var(--ink);display:block"></i>收入</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:6.8px;color:var(--muted)">
+                <i style="width:7px;height:7px;border-radius:2px;background:#C9CBC4;display:block"></i>支出</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 · 账户安全 -->
+      <div class="cwrap">
+        <span class="ctitle">08 · Account security</span>
+        <p class="cdesc">账户安全：勾选图标一律黑色（不用绿），三项轻量检查 + 浅灰盾牌水印。</p>
+        <div class="cstage">
+          <div class="card">
+            <span class="shieldwmark"><svg class="ic"><use href="#i-shield"/></svg></span>
+            <div class="card-t" style="position:relative;z-index:1">
+              <span class="lbl">Account security</span>
+              <span class="iconbox dark"><svg class="ic"><use href="#i-shield"/></svg></span>
+            </div>
+            <div style="position:relative;z-index:1">
+              <b style="display:block;font-size:15px;font-weight:700;letter-spacing:-.03em;margin-top:10px">账户安全</b>
+              <span class="sub" style="display:block;margin-top:4px">上次检查：今天 09:41</span>
+              <div class="checks">
+                <div class="check">
+                  <span class="ck"><svg class="ic"><use href="#i-check"/></svg></span>
+                  <div class="cm"><b>登录保护</b><small>面容 ID 已开启</small></div>
+                </div>
+                <div class="check">
+                  <span class="ck"><svg class="ic"><use href="#i-check"/></svg></span>
+                  <div class="cm"><b>设备管理</b><small>1 台常用设备</small></div>
+                </div>
+                <div class="check">
+                  <span class="ck"><svg class="ic"><use href="#i-check"/></svg></span>
+                  <div class="cm"><b>交易验证</b><small>大额需短信验证码</small></div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;margin-top:10px">
+                <span class="blackbtn">重新检查<svg class="ic"><use href="#i-chev"/></svg></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 <svg class="sprite" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1h-5v-6h-5v6h-5a1 1 0 0 1-1-1z"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
@@ -1028,6 +1402,8 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
   <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6 15h4"/></symbol>
   <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></symbol>
   <symbol id="i-send" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 4v4M12 16v4M4 12h4M16 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8"/></symbol>
