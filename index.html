@@ -588,6 +588,85 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .shieldwmark{position:absolute;right:-16px;bottom:-20px;width:104px;height:104px;
   color:rgba(17,19,24,.04);pointer-events:none}
 .shieldwmark .ic{width:100%;height:100%;stroke-width:1.2}
+
+/* ============================================================
+   WELCOME · 首次打开欢迎页（唯一基准：版本 C）
+   全部尺寸由 --u 派生（--u = 屏幕实际宽 / 375），320–430 自适应
+   ============================================================ */
+.welsec .welwrap{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:34px;
+  align-items:start;margin-top:18px}
+@media (max-width:860px){.welsec .welwrap{grid-template-columns:minmax(0,1fr)}}
+
+.wel{--u:calc(var(--screen-w,375px) / 375);
+  --c-bg:#F1F2EF;--c-soft:#ECEDE9;--c-line:rgba(17,19,24,.08);
+  background:var(--c-bg);
+  display:flex;flex-direction:column}
+
+/* 页面主体：上（字标+插画）中（文案）下（操作）三段式 */
+.welbody{flex:1;min-height:0;display:flex;flex-direction:column;
+  padding:calc(6 * var(--u)) calc(16 * var(--u)) 0;gap:calc(14 * var(--u))}
+
+/* 顶部字标 */
+.welbrand{display:flex;align-items:center;gap:calc(8 * var(--u));padding:calc(2 * var(--u)) calc(1 * var(--u)) 0}
+.welmark{width:calc(30 * var(--u));height:calc(30 * var(--u));border-radius:calc(10 * var(--u));
+  background:var(--ink);color:#fff;display:grid;place-items:center;flex:0 0 auto}
+.welmark .ic{width:calc(15 * var(--u));height:calc(15 * var(--u));stroke-width:1.7}
+.welbrand-t b{display:block;font-size:calc(11.5 * var(--u));font-weight:700;
+  letter-spacing:.1em;line-height:1.2}
+.welbrand-t small{display:block;font-size:calc(7.2 * var(--u));color:var(--muted);margin-top:calc(2 * var(--u))}
+
+/* 插画区：大型白色圆角卡片 */
+.welart{position:relative;overflow:hidden;background:#fff;
+  border-radius:calc(26 * var(--u));
+  box-shadow:0 18px 32px -25px rgba(17,19,24,.3),0 2px 5px -2px rgba(17,19,24,.05);
+  padding:calc(12 * var(--u));
+  display:grid;place-items:center;
+  flex:1 1 auto;min-height:0}
+/* 极低透明度水印，不影响主体识别 */
+.welwm{position:absolute;left:calc(10 * var(--u));top:calc(2 * var(--u));
+  font-size:calc(30 * var(--u));font-weight:800;letter-spacing:-.02em;
+  color:rgba(17,19,24,.032);pointer-events:none;white-space:nowrap}
+.welillo{width:100%;height:100%;max-height:calc(250 * var(--u));display:block}
+.welillo .hand{stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.welillo .hand rect{fill:#fff}
+.welillo .hand path{fill:none}
+.welillo .coingroup .coin-out{fill:var(--ink);stroke:none}
+.welillo .coingroup .coin-in{fill:#fff;stroke:none}
+.welillo .coingroup .coin-sym{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.welillo .dec{fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.32}
+
+/* 文案区 */
+.welcopy{padding:0 calc(2 * var(--u))}
+.wellbl{display:block;font-size:calc(7.2 * var(--u));font-weight:650;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.weltitle{margin:calc(9 * var(--u)) 0 0;font-size:calc(29 * var(--u));font-weight:700;
+  line-height:1.12;letter-spacing:-.035em;color:var(--ink)}
+.weldesc{margin:calc(9 * var(--u)) 0 0;font-size:calc(10.5 * var(--u));line-height:1.65;
+  color:var(--muted)}
+
+/* 操作区：主按钮 52px + 登录入口，含底部安全距离 */
+.welact{margin-top:auto;padding:calc(4 * var(--u)) calc(2 * var(--u))
+  calc(16 * var(--u) + env(safe-area-inset-bottom,0px))}
+.welbtn{width:100%;height:calc(52 * var(--u));border:0;cursor:pointer;
+  border-radius:calc(17 * var(--u));background:var(--ink);color:#fff;
+  font-family:inherit;font-size:calc(14 * var(--u));font-weight:650;letter-spacing:.01em;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 22px -12px rgba(17,19,24,.6);
+  transition:transform .15s var(--ease)}
+.welbtn:active{transform:scale(.975)}
+.wellogin{margin:calc(13 * var(--u)) 0 0;text-align:center;
+  font-size:calc(10.5 * var(--u));color:var(--ink2)}
+.wellogin a{color:var(--ink);font-weight:700;text-decoration:underline;
+  text-underline-offset:calc(3 * var(--u));text-decoration-thickness:1px}
+
+.welnotes{display:flex;flex-direction:column}
+.welnotes .notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.welnotes .notes li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px;
+  padding-top:11px;border-top:1px solid var(--rule)}
+.welnotes .notes li:first-child{border-top:0;padding-top:0}
+.welnotes .notes .k{font:600 10px var(--mono);color:var(--copper);padding-top:2px}
+.welnotes .notes span:last-child{font-size:12px;line-height:1.7;color:var(--ink2)}
+.welnotes .notes b{font-weight:650;color:var(--ink)}
 @media (max-width:760px){.wrap{padding:28px 18px 60px}}
 </style>
 </head>
@@ -859,6 +938,92 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
       </div>
     </div>
   </div><!-- /.stage -->
+
+  <!-- ═══════════ WELCOME 首次打开欢迎页 ═══════════ -->
+  <div class="callout welsec">
+    <h3>WELCOME · 首次打开欢迎页</h3>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 4px">以版本 C 为唯一视觉基准：暖浅灰 <code style="font:500 11px var(--mono)">#F1F2EF</code>、白色大圆角容器、黑色主文字、灰色辅助文字。<b>独立页面，不覆盖 A / C / C2</b>；无首页资产数据、无快捷卡、无底部导航、无轮播圆点。浅金色仅属小安图标，未扩展为主色。</p>
+    <div class="welwrap">
+      <div class="phone">
+        <div class="screen wel">
+          <div class="island" aria-hidden="true"></div>
+          <div class="sbar"><span>9:41</span><span class="sbicons" aria-hidden="true"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span></div>
+
+          <div class="welbody">
+            <!-- 顶部字标 -->
+            <div class="welbrand">
+              <span class="welmark"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span>
+              <div class="welbrand-t">
+                <b>SAFE BANK</b>
+                <small>安全银行服务</small>
+              </div>
+            </div>
+
+            <!-- 插画区：大型白色圆角卡片 -->
+            <div class="welart">
+              <span class="welwm" aria-hidden="true">SAFE BANK</span>
+              <svg class="welillo" viewBox="0 0 311 250" role="img" aria-label="两只手一递一接，把硬币安全交到手中">
+                <!-- 上方：递出的手（掌身 + 四指 + 拇指，几何简化画法） -->
+                <g class="hand">
+                  <rect x="122" y="14" width="66" height="34" rx="11"/>
+                  <rect x="127" y="40" width="11" height="30" rx="5.5"/>
+                  <rect x="143" y="42" width="11" height="36" rx="5.5"/>
+                  <rect x="159" y="42" width="11" height="32" rx="5.5"/>
+                  <rect x="175" y="40" width="11" height="24" rx="5.5"/>
+                  <path d="M122 34c-8-1-13-7-14-15 0-3.5 3.5-6 7-4.5 5.5 2.5 9 7 11 12.5"/>
+                </g>
+                <!-- 硬币：黑灰层次 -->
+                <g class="coingroup">
+                  <circle cx="155.5" cy="124" r="24" class="coin-out"/>
+                  <circle cx="155.5" cy="124" r="17" class="coin-in"/>
+                  <path d="M155.5 114.5v19M150.5 118.8h8a3 3 0 0 1 0 6h-6a3 3 0 0 0 0 6h8" class="coin-sym"/>
+                </g>
+                <!-- 下方：接住的手（上下镜像） -->
+                <g class="hand">
+                  <rect x="122" y="202" width="66" height="34" rx="11"/>
+                  <rect x="127" y="180" width="11" height="30" rx="5.5"/>
+                  <rect x="143" y="172" width="11" height="36" rx="5.5"/>
+                  <rect x="159" y="176" width="11" height="32" rx="5.5"/>
+                  <rect x="175" y="186" width="11" height="24" rx="5.5"/>
+                  <path d="M122 216c-8 1-13 7-14 15 0 3.5 3.5 6 7 4.5 5.5-2.5 9-7 11-12.5"/>
+                </g>
+                <!-- 少量装饰：四角星 / 加号 / 圆环 -->
+                <g class="dec">
+                  <path d="M244 46c1.2 5.4 3 7.2 8.4 8.4-5.4 1.2-7.2 3-8.4 8.4-1.2-5.4-3-7.2-8.4-8.4 5.4-1.2 7.2-3 8.4-8.4Z"/>
+                  <path d="M52 104v9M47.5 108.5h9"/>
+                  <circle cx="256" cy="180" r="14"/>
+                  <circle cx="68" cy="64" r="5"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- 文案区 -->
+            <div class="welcopy">
+              <span class="wellbl">Welcome to Safe Bank</span>
+              <h2 class="weltitle">Take control of<br>your money</h2>
+              <p class="weldesc">账户、转账与理财，在一个安全、清晰的空间轻松完成。</p>
+            </div>
+
+            <!-- 操作区 -->
+            <div class="welact">
+              <button type="button" class="welbtn">开始使用</button>
+              <p class="wellogin">已有账户？<a href="#login">登录</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="welnotes">
+        <div class="colhead" style="margin-bottom:10px"><span class="vn">WELCOME</span><h2>首次打开</h2><span class="src">/welcome</span></div>
+        <ol class="notes">
+          <li><span class="k">01</span><span><b>只有欢迎内容</b>状态栏 + SAFE BANK 字标 → 插画 → 文案 → 操作；无资产数据、快捷卡、底部导航、轮播点。</span></li>
+          <li><span class="k">02</span><span><b>插画为内联 SVG</b>黑白线性：上方手递出、下方手接住，硬币用黑灰层次；仅少量四角星／加号／圆环装饰，无蓝无金。</span></li>
+          <li><span class="k">03</span><span><b>主按钮 52px / 圆角 17px</b>黑色实心全宽；登录入口为黑色加粗下划线，非蓝色。操作区含底部安全距离。</span></li>
+          <li><span class="k">04</span><span><b>自适应 320–430px</b>尺寸由 --u（屏幕宽 / 375）派生，安全区用 env(safe-area-inset-bottom)；无横向溢出。</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
 
   <div class="callout">
     <h3>小安图标 · 新参考图</h3>
