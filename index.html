@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SafeBank 首页试验 · 版本 A / B / C / C2</title>
+<title>SafeBank 首页试验 · 版本 A / C / C2</title>
 <style>
 /* ============================================================
    首页试验稿 · 只用于对比，不改动正式界面简报
@@ -19,20 +19,22 @@
   --red:#C6433C; --red-soft:#FBEDEB; --gain:#C6433C; --loss:#2F7D5F;
   --fill:#F2F0E9; --line:rgba(17,19,24,.07); --chev:#B9B4A9;
   --glass:rgba(251,250,246,.8);
+  /* 小安图标色：参考图的柔和浅金 */
+  --an-gold:#E7D7A4;
   --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1720px;margin:0 auto;padding:40px 32px 80px}
+.wrap{max-width:1240px;margin:0 auto;padding:40px 32px 80px}
 h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .lede{color:var(--muted);font-size:13.5px;margin:0 0 8px;max-width:820px}
 .note{color:var(--copper-deep);font-size:12px;background:var(--copper-soft);border:1px solid rgba(178,107,62,.2);border-radius:10px;padding:8px 12px;display:inline-block;margin-top:10px}
 
-.stage{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px;margin-top:36px;align-items:start}
-@media (max-width:1500px){.stage{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}}
-@media (max-width:820px){.stage{grid-template-columns:minmax(0,1fr);gap:40px}}
+.stage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;margin-top:36px;align-items:start}
+@media (max-width:1100px){.stage{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}}
+@media (max-width:760px){.stage{grid-template-columns:minmax(0,1fr);gap:40px}}
 .col{min-width:0}
 .col{display:flex;flex-direction:column;gap:14px;min-width:0}
 .colhead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
@@ -133,6 +135,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .wg.hero .hb{height:26px;padding:0 10px;border-radius:999px;display:flex;align-items:center;gap:4px;
   background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);font-size:8.4px;font-weight:600;white-space:nowrap}
 .wg.hero .hb .ic{width:10px;height:10px}
+.wg.hero .hb.an .ic{color:var(--an-gold);stroke-width:1.8}
 .wg.hero .hb.solid{background:#fff;color:var(--royal-deep);border-color:#fff}
 .wg.hero .hb:not(.solid){flex:1}
 .wg.hero .hb.circ{width:26px;justify-content:center;padding:0;flex:0 0 auto}
@@ -272,7 +275,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
   display:flex;align-items:center;justify-content:center}
 .bbar .bagent .disc{display:grid;place-items:center;width:var(--nav-disc);height:var(--nav-disc);border-radius:50%;
   position:relative;z-index:2;background:var(--royal);box-shadow:0 8px 18px -6px rgba(23,26,153,.45)}
-.bbar .bagent .disc .ic{width:var(--nav-icon);height:var(--nav-icon);stroke-width:1.8;color:#fff}
+.bbar .bagent .disc .ic{width:var(--nav-icon);height:var(--nav-icon);stroke-width:1.8;color:var(--an-gold)}
 .bbar .bagent .disc:active{transform:scale(.94);transition:transform .15s var(--ease)}
 
 /* iOS home indicator */
@@ -322,7 +325,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .cscreen{--c-bg:#F1F2EF;--c-soft:#ECEDE9;--c-line:rgba(17,19,24,.08);background:var(--c-bg)}
 .cbody{padding:4px 12px 14px;background:var(--c-bg)}
 .chead{display:flex;align-items:center;gap:8px;padding:3px 1px 0}
-.cmark{width:32px;height:32px;border-radius:11px;background:var(--ink);color:var(--white);
+.cmark{width:32px;height:32px;border-radius:11px;background:var(--ink);color:var(--an-gold);
   display:grid;place-items:center;box-shadow:0 7px 14px -9px rgba(17,19,24,.7);flex:0 0 auto}
 .cmark .ic{width:17px;height:17px;stroke-width:1.6}
 .chead-main{flex:1;min-width:0}
@@ -408,7 +411,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .ct.on{color:var(--ink);font-weight:700}
 .ct.on .ic{stroke-width:2.3}
 .cagent{justify-self:center;width:calc(46 * var(--u,1));height:calc(46 * var(--u,1));border-radius:50%;
-  background:var(--ink);color:var(--white);
+  background:var(--ink);color:var(--an-gold);
   display:grid;place-items:center;box-shadow:0 9px 17px -9px rgba(17,19,24,.65)}
 .cagent .ic{width:calc(22 * var(--u,1));height:calc(22 * var(--u,1));stroke-width:1.6}
 .chind{position:absolute;z-index:3;left:50%;bottom:calc(6 * var(--u,1));transform:translateX(-50%);
@@ -585,54 +588,16 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .shieldwmark{position:absolute;right:-16px;bottom:-20px;width:104px;height:104px;
   color:rgba(17,19,24,.04);pointer-events:none}
 .shieldwmark .ic{width:100%;height:100%;stroke-width:1.2}
-@media (max-width:1080px){.stage{grid-template-columns:1fr;gap:40px}.wrap{padding:28px 18px 60px}}
+@media (max-width:760px){.wrap{padding:28px 18px 60px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>SafeBank 首页 · 试验稿（版本 A / B1 / B2 / C / C2）</h1>
-  <p class="lede">只用于对比效果，<b>不影响已上传的界面简报文件</b>。六列：基准（现有首页）/ 版本 A（灵动岛+小组件）/ <b>B1（图二导航 · 品牌蓝）</b> / <b>B2（C 内容 · B2 导航）</b> / <b>C（黑白灰卡片 · 快捷操作）</b> / <b>C2（C 内容 · 三栏黑色下凹导航）</b>。账户内容保持一致，只改视觉与摆放。</p>
+  <h1>SafeBank 首页 · 试验稿（版本 A / C / C2）</h1>
+  <p class="lede">只用于对比效果，<b>不影响已上传的界面简报文件</b>。三列：<b>版本 A（灵动岛 + 小组件）</b> / <b>C（黑白灰卡片 + 快捷操作）</b> / <b>C2（C 内容 + 三栏黑色下凹导航）</b>。账户内容保持一致，只改视觉与摆放。<b>小安图标已按新参考图替换（黑色圆底 + 金色四角星）。</b></p>
   <span class="note">试验稿 · 非正式交付 · 设计 token 与正式简报一致</span>
 
   <div class="stage">
-
-    <!-- ═══════════ 对照：现有首页 ═══════════ -->
-    <div class="col base">
-      <div class="colhead"><span class="vn">基准</span><h2>现有首页</h2><span class="src">current</span></div>
-      <p class="colsub">硬分割线分区，小安在 Tabbar 中央凸起 + 右下角悬浮球。</p>
-      <div class="phone">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="sbar"><span>9:41</span><span class="sbicons"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span></div>
-          <div class="body scroll" style="padding-top:4px">
-            <div class="lt"><b>早上好，张三</b><small>10 月 25 日 · Everyday 账户</small></div>
-            <div style="height:9px"></div>
-            <div class="balance">
-              <div class="lbl">TOTAL BALANCE · 总资产</div>
-              <div class="amt">26,000<span class="cents">.00</span></div>
-              <div class="sub"><span>活期 6,000.00</span><span>·</span><span>储蓄 20,000.00</span></div>
-            </div>
-            <div style="height:8px"></div>
-            <div class="notice"><span class="dot"></span><span>7 天内待扣 <b>¥45.00</b> · 2 笔</span><span class="go">查看 ›</span></div>
-            <div style="height:10px"></div>
-            <div class="head-row"><b>最近交易</b><span>全部 ›</span></div>
-            <div class="tx"><span class="av c sm">咖</span><div class="tx-main"><b>山野咖啡</b><small>今天 9:12 · 餐饮</small></div><span class="amt-sm">−6.80</span></div>
-            <div class="tx"><span class="av sm">北</span><div class="tx-main"><b>Studio North</b><small>昨天 · 项目款</small></div><span class="amt-sm">+1,850.00</span></div>
-            <div class="tx"><span class="av k sm">福</span><div class="tx-main"><b>福玛超市</b><small>昨天 18:34 · 购物</small></div><span class="amt-sm">−42.36</span></div>
-            <div style="height:10px"></div>
-            <div class="panel-w"><span class="lbl">月度支出 · 10 月</span><div class="amt-sm" style="font-size:12px;margin-top:1px">¥1,486.24</div></div>
-          </div>
-          <span class="fab-assist"><span class="orb"></span><span class="badge2">1</span></span>
-          <nav class="tabbar">
-            <span class="tab on"><svg class="ic"><use href="#i-home"/></svg>首页</span>
-            <span class="tab"><svg class="ic"><use href="#i-chart"/></svg>理财</span>
-            <span class="tab center"><span class="agent-fab"><span class="orb" style="width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 34% 26%,#fff 0 9%,rgba(255,255,255,.72) 17%,rgba(255,255,255,0) 46%),radial-gradient(circle at 50% 122%,var(--copper) 0 28%,rgba(178,107,62,0) 62%),radial-gradient(circle at 50% 46%,#7C80FF 0%,#3A3EE0 55%,#171A99 100%)"></span></span><span class="agent-lbl">小安</span></span>
-            <span class="tab"><svg class="ic"><use href="#i-card"/></svg>卡片</span>
-            <span class="tab"><svg class="ic"><use href="#i-person"/></svg>个人</span>
-          </nav>
-        </div>
-      </div>
-    </div>
 
     <!-- ═══════════ 版本 A ═══════════ -->
     <div class="col">
@@ -661,7 +626,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
                 <div class="hsub"><span>活期 6,000.00</span><span>·</span><span>储蓄 20,000.00</span></div>
                 <div class="hact">
                   <span class="hb solid"><svg class="ic"><use href="#i-send"/></svg>转账</span>
-                  <span class="hb"><svg class="ic"><use href="#i-spark"/></svg>小安</span>
+                  <span class="hb an"><svg class="ic" aria-hidden="true"><use href="#i-an"/></svg>小安</span>
                   <span class="hb circ"><svg class="ic"><use href="#i-plus"/></svg></span>
                 </div>
               </div>
@@ -727,191 +692,6 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
       </div>
     </div>
 
-    <!-- ═══════════ 版本 B ═══════════ -->
-    <div class="col">
-      <div class="colhead"><span class="vn">VERSION B1</span><h2>实心蓝圆盘</h2><span class="src">参考图二</span></div>
-      <p class="colsub">按图二改为<b>白色通栏 + 平滑下凹缺口</b>，中央 <b>50px 品牌蓝实心圆盘</b>半跨顶边，内含白色扫描图标；首页图标与文案使用品牌蓝选中态。</p>
-      <div class="phone">
-        <div class="screen">
-          <div class="island"></div>
-          <div class="sbar"><span>9:41</span><span class="sbicons"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span></div>
-          <div class="body scroll" style="padding-top:4px">
-
-            <div style="position:relative">
-              <div class="lt"><b>早上好，张三</b><small>10 月 25 日 · Everyday 账户</small></div>
-              <!-- B：悬浮球移到右上，与留白对齐 -->
-              <span class="fab-b"><span class="orb"></span><span class="bdg">1</span></span>
-            </div>
-
-            <div class="bstack">
-              <div class="bhero">
-                <span class="halo"></span>
-                <div class="lbl" style="color:rgba(255,255,255,.62);letter-spacing:.14em;text-transform:uppercase;font-size:6.8px">Total balance · 总资产</div>
-                <div class="hbig"><span class="int">26,000</span><span class="dec">.00</span></div>
-                <div style="display:flex;gap:5px;margin-top:4px;font-size:7.4px;opacity:.8"><span>活期 6,000.00</span><span>·</span><span>储蓄 20,000.00</span></div>
-                <div class="bacts">
-                  <span class="bact solid"><svg class="ic"><use href="#i-send"/></svg>转账</span>
-                  <span class="bact"><svg class="ic"><use href="#i-spark"/></svg>小安</span>
-                  <span class="bact"><svg class="ic"><use href="#i-plus"/></svg>更多</span>
-                </div>
-              </div>
-
-              <!-- 悬停提示卡：无边框，靠底色 -->
-              <div style="border-radius:18px;padding:11px 13px;background:var(--copper-soft)">
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div style="flex:1;min-width:0">
-                    <b style="display:block;font-size:9.6px;font-weight:600;color:var(--copper-deep)">7 天内待扣 ¥45.00</b>
-                    <small style="display:block;font-size:6.8px;color:var(--copper-deep);opacity:.72;margin-top:2px">2 笔 · 最近 10-27</small>
-                  </div>
-                  <span style="font-size:7.6px;font-weight:650;color:var(--copper-deep)">查看 ›</span>
-                </div>
-              </div>
-
-              <div class="bcard">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">
-                  <b style="font-size:10px;font-weight:650">最近交易</b><span style="font-size:7.4px;color:var(--muted)">全部 ›</span>
-                </div>
-                <div class="brow"><span class="av c sm">咖</span><div class="bm"><b>山野咖啡</b><small>今天 9:12 · 餐饮</small></div><span class="amt-sm">−6.80</span></div>
-                <div class="brow"><span class="av sm">北</span><div class="bm"><b>Studio North</b><small>昨天 · 项目款</small></div><span class="amt-sm">+1,850.00</span></div>
-                <div class="brow"><span class="av k sm">福</span><div class="bm"><b>福玛超市</b><small>昨天 18:34 · 购物</small></div><span class="amt-sm">−42.36</span></div>
-              </div>
-
-              <div class="bgrid">
-                <div class="btile">
-                  <span class="lbl">月度支出 · 10 月</span>
-                  <div class="v">¥1,486.24</div>
-                </div>
-                <div class="btile">
-                  <span class="lbl">近 30 天余额</span>
-                  <div class="v" style="color:var(--royal)">+2.4%</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <!-- B：图二的白色通栏 + 下凹缺口 + 中央扫描圆钮，保留品牌蓝 -->
-          <nav class="tabbar b" aria-label="版本 B1 底部导航">
-            <div class="bbar v1">
-              <svg class="bnotch" viewBox="0 0 375 76" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="notchShade1" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#111318" stop-opacity=".075"/>
-                    <stop offset="1" stop-color="#111318" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path class="nsurface" d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V76 H0 Z"/>
-                <path class="nshade" fill="url(#notchShade1)"
-                  d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V48 H0 Z"/>
-              </svg>
-              <div class="bsurface">
-                <span class="bt on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
-                <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg>理财</span>
-                <span class="bslot"></span>
-                <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-card"/></svg>卡片</span>
-                <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>个人</span>
-              </div>
-              <div class="bagent" title="扫描">
-                <span class="disc"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg></span>
-              </div>
-              <div class="hind"></div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════ 版本 B2 · C 版内容 + B2 底部导航 ═══════════ -->
-    <div class="col">
-      <div class="colhead"><span class="vn">VERSION B2</span><h2>C 版内容 + B2 导航</h2><span class="src">组合方案</span></div>
-      <p class="colsub">沿用 C 的<b>黑白灰首页与两项快捷操作</b>，底部完整保留 B2 的白色下凹导航、品牌蓝扫描圆钮和首页选中态。</p>
-      <div class="phone">
-        <div class="screen cscreen">
-          <div class="island"></div>
-          <div class="sbar"><span>9:41</span><span class="sbicons"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span></div>
-          <div class="body scroll cbody">
-            <div class="chead">
-              <span class="cmark"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
-              <div class="chead-main"><b>张三 · Everyday</b><small>Connected · 账户安全连接</small></div>
-              <span class="csecure"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>安全</span>
-            </div>
-
-            <div class="chero">
-              <span class="clbl">Total balance · 总资产</span>
-              <div class="camount">26,000<small>.00</small></div>
-              <div class="csub"><span>活期 6,000.00</span><span>·</span><span>储蓄 20,000.00</span></div>
-              <div class="cstatus">
-                <div><b>账户状态良好</b><small>10 月 25 日 · 2 笔待扣</small></div>
-                <div class="cactions">
-                  <span class="cprimary">转账<svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></span>
-                  <span class="ciconbtn" title="更多"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cstats">
-              <div class="cstat"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg><small>活期</small><b>6,000</b></div>
-              <div class="cstat"><svg class="ic" aria-hidden="true"><use href="#i-card"/></svg><small>储蓄</small><b>20,000</b></div>
-              <div class="cstat"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><small>7 天待扣</small><b>¥45</b></div>
-            </div>
-
-            <div class="csection">
-              <div class="csection-head"><b>QUICK ACTIONS</b><span>一键办理</span></div>
-              <div class="cquick">
-                <div class="cquick-card">
-                  <div class="cquick-top"><span class="cqicon"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span><b>理财收益</b></div>
-                  <span class="cquick-desc">查看资产表现</span><span class="cgo"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></span>
-                </div>
-                <div class="cquick-card">
-                  <div class="cquick-top"><span class="cqicon"><svg class="ic" aria-hidden="true"><use href="#i-card"/></svg></span><b>卡片管理</b></div>
-                  <span class="cquick-desc">账户与卡片设置</span><span class="cgo"><svg class="ic" aria-hidden="true"><use href="#i-send"/></svg></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="csection">
-              <div class="csection-head"><b>最近交易</b><span>全部 ›</span></div>
-              <div class="ctx-list">
-                <div class="ctx"><span class="cavatar">咖</span><div class="ctx-main"><b>山野咖啡</b><small>今天 9:12 · 餐饮</small></div><span class="ctx-amt">−6.80</span></div>
-                <div class="ctx"><span class="cavatar">北</span><div class="ctx-main"><b>Studio North</b><small>昨天 · 项目款</small></div><span class="ctx-amt">+1,850.00</span></div>
-                <div class="ctx"><span class="cavatar">福</span><div class="ctx-main"><b>福玛超市</b><small>昨天 18:34 · 购物</small></div><span class="ctx-amt">−42.36</span></div>
-              </div>
-            </div>
-
-            <div class="csummary">
-              <div class="ctile"><span>月度支出 · 10 月</span><b>¥1,486.24</b></div>
-              <div class="ctile"><span>近 30 天余额</span><b>+2.4%</b></div>
-            </div>
-          </div>
-          <nav class="tabbar b" aria-label="版本 B2 底部导航">
-            <div class="bbar v2">
-              <svg class="bnotch" viewBox="0 0 375 76" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="notchShade2" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#111318" stop-opacity=".075"/>
-                    <stop offset="1" stop-color="#111318" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path class="nsurface" d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V76 H0 Z"/>
-                <path class="nshade" fill="url(#notchShade2)"
-                  d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V48 H0 Z"/>
-              </svg>
-              <div class="bsurface">
-                <span class="bt on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
-                <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg>理财</span>
-                <span class="bslot"></span>
-                <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-card"/></svg>卡片</span>
-                <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>个人</span>
-              </div>
-              <div class="bagent" title="扫描">
-                <span class="disc"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg></span>
-              </div>
-              <div class="hind"></div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-
     <!-- ═══════════ 版本 C · 黑白灰产品风 ═══════════ -->
     <div class="col">
       <div class="colhead"><span class="vn">VERSION C</span><h2>黑白灰卡片 + 快捷操作</h2><span class="src">新参考图</span></div>
@@ -922,7 +702,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
           <div class="sbar"><span>9:41</span><span class="sbicons"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span></div>
           <div class="body scroll cbody">
             <div class="chead">
-              <span class="cmark"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="cmark"><svg class="ic" aria-hidden="true"><use href="#i-an"/></svg></span>
               <div class="chead-main"><b>张三 · Everyday</b><small>Connected · 账户安全连接</small></div>
               <span class="csecure"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>安全</span>
             </div>
@@ -979,7 +759,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
             <svg class="cnav-shape" viewBox="0 0 375 78" preserveAspectRatio="none" aria-hidden="true"><path d="M0 25 Q187.5 -10 375 25 V78 H0 Z"/></svg>
             <div class="cnav-items">
               <span class="ct on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
-              <span class="cagent" title="小安"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="cagent" title="小安"><svg class="ic" aria-hidden="true"><use href="#i-an"/></svg></span>
               <span class="ct"><svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>个人</span>
             </div>
             <div class="chind"></div>
@@ -998,7 +778,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
           <div class="sbar"><span>9:41</span><span class="sbicons"><i class="sig"></i><i class="wifi"></i><i class="batt"></i></span></div>
           <div class="body scroll cbody">
             <div class="chead">
-              <span class="cmark"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
+              <span class="cmark"><svg class="ic" aria-hidden="true"><use href="#i-an"/></svg></span>
               <div class="chead-main"><b>张三 · Everyday</b><small>Connected · 账户安全连接</small></div>
               <span class="csecure"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>安全</span>
             </div>
@@ -1070,7 +850,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
                 <span class="bt"><svg class="ic" aria-hidden="true"><use href="#i-person"/></svg>个人</span>
               </div>
               <div class="bagent" title="小安">
-                <span class="disc"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
+                <span class="disc"><svg class="ic" aria-hidden="true"><use href="#i-an"/></svg></span>
               </div>
               <div class="hind"></div>
             </div>
@@ -1081,53 +861,26 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
   </div><!-- /.stage -->
 
   <div class="callout">
-    <h3>小安图标 · 金属球 / 水珠质感（六套）</h3>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 6px">按你说的「金属球 / 水珠」方向重做。质感公式 = <b>环境渐变</b>（上暗下亮，模拟天光＋地面反射）＋ <b>主高光</b>（左上，小而锐）＋ <b>次高光</b>（右下，大而柔）＋ <b>轮廓光</b>（边缘亮线，金属的倒角）。全部蓝色系。</p>
-    <p style="font-size:12px;color:var(--muted);margin:0 0 16px">M1–M2 是金属球（高光锐、对比强）；M3–M4 是水珠（高光大而软、底部透光）；M5–M6 是对照。</p>
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px;align-items:start">
+    <h3>小安图标 · 新参考图</h3>
+    <p style="font-size:12px;color:var(--muted);margin:0 0 16px">已统一替换为 SVG 矢量图标：深黑圆形底、浅金四角星、右上加号与左下圆环。不同尺寸共用同一符号，不依赖位图放大。</p>
+    <div style="display:flex;align-items:flex-end;justify-content:center;gap:24px;flex-wrap:wrap;padding:8px 0 4px">
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="display:flex;gap:5px">
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#FBFAF6;box-shadow:inset 0 0 0 1px rgba(17,19,24,.06)"><span class="orb-base m1" style="--orb-size:28px"></span></div>
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#0C0D11"><span class="orb-base m1" style="--orb-size:28px"></span></div>
-        </div>
-        <b style="font-size:10.5px">M1 · 金属球</b><small style="font-size:9px;color:var(--muted);text-align:center">铬球质感，强对比</small></div>
-
+        <span style="width:72px;height:72px;border-radius:50%;background:var(--ink);color:var(--an-gold);display:grid;place-items:center"><svg class="ic" style="width:42px;height:42px;stroke-width:1.4" aria-hidden="true"><use href="#i-an"/></svg></span>
+        <small style="font-size:10px;color:var(--muted)">72px · 细节预览</small>
+      </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="display:flex;gap:5px">
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#FBFAF6;box-shadow:inset 0 0 0 1px rgba(17,19,24,.06)"><span class="orb-base m2" style="--orb-size:28px"></span></div>
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#0C0D11"><span class="orb-base m2" style="--orb-size:28px"></span></div>
-        </div>
-        <b style="font-size:10.5px">M2 · 冷银蓝</b><small style="font-size:9px;color:var(--muted);text-align:center">更"钢"，高光冷</small></div>
-
+        <span style="width:50px;height:50px;border-radius:50%;background:var(--ink);color:var(--an-gold);display:grid;place-items:center"><svg class="ic" style="width:28px;height:28px;stroke-width:1.6" aria-hidden="true"><use href="#i-an"/></svg></span>
+        <small style="font-size:10px;color:var(--muted)">50px</small>
+      </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="display:flex;gap:5px">
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#FBFAF6;box-shadow:inset 0 0 0 1px rgba(17,19,24,.06)"><span class="orb-base m3" style="--orb-size:28px"></span></div>
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#0C0D11"><span class="orb-base m3" style="--orb-size:28px"></span></div>
-        </div>
-        <b style="font-size:10.5px">M3 · 水珠蓝</b><small style="font-size:9px;color:var(--muted);text-align:center">高光软，底部透光</small></div>
-
+        <span style="width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--an-gold);display:grid;place-items:center"><svg class="ic" style="width:19px;height:19px;stroke-width:1.7" aria-hidden="true"><use href="#i-an"/></svg></span>
+        <small style="font-size:10px;color:var(--muted)">32px</small>
+      </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="display:flex;gap:5px">
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#FBFAF6;box-shadow:inset 0 0 0 1px rgba(17,19,24,.06)"><span class="orb-base m4" style="--orb-size:28px"></span></div>
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#0C0D11"><span class="orb-base m4" style="--orb-size:28px"></span></div>
-        </div>
-        <b style="font-size:10.5px">M4 · 清透青蓝</b><small style="font-size:9px;color:var(--muted);text-align:center">最"水"，带一点青</small></div>
-
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="display:flex;gap:5px">
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#FBFAF6;box-shadow:inset 0 0 0 1px rgba(17,19,24,.06)"><span class="orb-base m5" style="--orb-size:28px"></span></div>
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#0C0D11"><span class="orb-base m5" style="--orb-size:28px"></span></div>
-        </div>
-        <b style="font-size:10.5px">M5 · 哑光钴蓝</b><small style="font-size:9px;color:var(--muted);text-align:center">喷砂金属，高光柔</small></div>
-
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="display:flex;gap:5px">
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#FBFAF6;box-shadow:inset 0 0 0 1px rgba(17,19,24,.06)"><span class="orb-base m6" style="--orb-size:28px"></span></div>
-          <div style="width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#0C0D11"><span class="orb-base m6" style="--orb-size:28px"></span></div>
-        </div>
-        <b style="font-size:10.5px">M6 · 蓝紫水珠</b><small style="font-size:9px;color:var(--muted);text-align:center">带紫，最梦幻</small></div>
+        <span style="width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--an-gold);display:grid;place-items:center"><svg class="ic" style="width:15px;height:15px;stroke-width:1.8" aria-hidden="true"><use href="#i-an"/></svg></span>
+        <small style="font-size:10px;color:var(--muted)">24px</small>
+      </div>
     </div>
-    <p style="font-size:11.5px;color:var(--copper-deep);background:var(--copper-soft);border-radius:10px;padding:9px 12px;margin:18px 0 0">两点想确认：<b>① 你要金属球还是水珠？</b>金属球更"硬件/AI"，水珠更"活、有生命"。<b>② 大小</b> —— 现在 24–28px，如果想让它更像主角可以放大到 34–40px。</p>
   </div>
 
   <div class="callout">
@@ -1140,7 +893,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
         <tr><td>总资产区</td><td>单张蓝卡</td><td>英雄小组件 + 双列活期/储蓄小卡</td><td>蓝卡改为无边框按钮组</td><td colspan="3">白色余额主卡 + 黑色主按钮</td></tr>
         <tr><td>底部导航形态</td><td>通栏 bar + 凸起圆钮</td><td><b>浅色悬浮胶囊</b>，五个图标等距排列；中央卡片项为蓝色圆形选中态</td><td colspan="2">白色通栏 bar；顶部为真实平滑下凹弧形缺口，中央按钮半跨顶边</td><td>白色上拱 bar；中央黑色圆钮收在导航面内，简化为三栏</td><td>B2 同款白色下凹 bar；中央黑色圆钮半跨顶边，简化为三栏</td></tr>
         <tr><td>导航文案</td><td>首页 · 理财 · 小安 · 卡片 · 个人</td><td>纯图标导航，中央卡片项选中</td><td colspan="2"><b>首页 · 理财 · ● · 卡片 · 个人</b>，首页使用品牌蓝选中态</td><td colspan="2"><b>首页 · 小安 · 个人</b>，首页使用黑色选中态</td></tr>
-        <tr><td>中央按钮</td><td>38px 凸起圆钮（蓝渐变+铜环）</td><td>无独立凸起按钮，中央为卡片选中图标</td><td colspan="2"><b>50px 品牌蓝实心圆盘</b> + 白色扫描图标</td><td><b>46px 黑色圆钮</b> + 白色小安图标</td><td><b>50px 黑色实心圆盘</b> + 白色小安图标</td></tr>
+        <tr><td>中央按钮</td><td>38px 凸起圆钮（蓝渐变+铜环）</td><td>无独立凸起按钮，中央为卡片选中图标</td><td colspan="2"><b>50px 品牌蓝实心圆盘</b> + 白色扫描图标</td><td><b>46px 黑色圆钮</b> + 浅金小安图标</td><td><b>50px 黑色实心圆盘</b> + 浅金小安图标</td></tr>
         <tr><td>悬浮球</td><td>右下角悬浮</td><td>右下角悬浮（不变）</td><td>移到内容右上，与留白对齐</td><td colspan="3">不设额外悬浮球</td></tr>
         <tr><td>分割线</td><td>hairline 硬线</td><td>小组件之间用间距分隔</td><td>内容区与底部均去掉硬分割线，以留白和柔和阴影分区</td><td colspan="3">以卡片、留白和轻投影分区</td></tr>
       </tbody>
@@ -1407,6 +1160,12 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.3-8 10-4.6-1.7-8-5-8-10V6z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 4v4M12 16v4M4 12h4M16 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8"/></symbol>
+  <!-- 小安图标：圆润四角星 + 右上加号 + 左下圆环，与 SVG 预览一致 -->
+  <symbol id="i-an" viewBox="0 0 24 24">
+    <path d="M12 4.125 C12.75 8.625 14.25 10.5 18.75 12 C14.25 13.5 12.75 15.375 12 19.875 C11.25 15.375 9.75 13.5 5.25 12 C9.75 10.5 11.25 8.625 12 4.125 Z"/>
+    <path d="M17.625 4.125v3M15.375 5.625h4.5"/>
+    <circle cx="6" cy="17.625" r="1.275"/>
+  </symbol>
   <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <!-- AI 扫描图标：四角取景框 + 中央星芒 -->
   <symbol id="i-scan" viewBox="0 0 24 24">
