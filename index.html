@@ -47,7 +47,9 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
   box-shadow:0 34px 66px -22px rgba(17,19,24,.38),inset 0 0 0 1px rgba(255,255,255,.13);}
 .phone::after{content:"";position:absolute;right:-2px;top:128px;width:2px;height:52px;border-radius:2px;background:#20232B}
 .screen{position:relative;display:flex;flex-direction:column;aspect-ratio:375/812;overflow:hidden;border-radius:38px;
-  background:var(--ivory);color:var(--ink);font-size:11px;line-height:1.35}
+  background:var(--ivory);color:var(--ink);font-size:11px;line-height:1.35;
+  /* 容器查询上下文：导航等后代可用 cqw 拿到屏幕实际宽度 */
+  container-type:inline-size;container-name:screen}
 .island{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:64px;height:18px;border-radius:999px;background:#08090C;z-index:9}
 .sbar{flex:0 0 auto;height:30px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:650;position:relative;z-index:8}
 .sbicons{display:flex;align-items:center;gap:5px}
@@ -231,31 +233,51 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
    ============================================================ */
 .tabbar.b{padding:0;height:auto;border-top:0;background:transparent;
   -webkit-backdrop-filter:none;backdrop-filter:none;display:block}
-.bbar{position:relative;padding-bottom:18px}
+/* ── 自适应基准：所有导航尺寸都由 --u 派生 ──
+   --u = 屏幕实际宽度 / 375（1u 即 iPhone 逻辑像素）。
+   375 宽时与原始设计完全一致，其它宽度按比例缩放；
+   不支持 cqw 的老浏览器回退为 375，即原尺寸，不会崩。 */
+@supports (width:1cqw){
+  .bbar,.cnav,.c2bar{--screen-w:100cqw}
+}
+.bbar,.cnav,.c2bar{--u:calc(var(--screen-w,375px) / 375);
+  --nav-disc:calc(50 * var(--u));
+  --nav-icon:calc(22 * var(--u));
+  --nav-slot:calc(68 * var(--u));
+  --nav-tab-ic:calc(18 * var(--u));
+  --nav-tab-fs:calc(7.2 * var(--u));
+  --nav-bar-h:calc(58 * var(--u));
+  --nav-notch-h:calc(76 * var(--u));
+  --nav-bottom:calc(18 * var(--u));
+  --nav-hind-w:calc(96 * var(--u));
+  --nav-hind-h:max(3px,calc(4 * var(--u)));}
+.bbar{position:relative;padding-bottom:var(--nav-bottom)}
 /* HTML 标签层保持透明，白色底面与缺口由后方 SVG 一次成形 */
-.bbar .bsurface{position:relative;z-index:1;height:58px;padding:9px 4px 0;
+.bbar .bsurface{position:relative;z-index:1;height:var(--nav-bar-h);padding:calc(9 * var(--u)) 4px 0;
   background:transparent;display:flex;align-items:center}
-.bbar .bnotch{position:absolute;left:0;right:0;top:0;height:76px;z-index:0;
+.bbar .bnotch{position:absolute;left:0;right:0;top:0;height:var(--nav-notch-h);z-index:0;
   pointer-events:none;display:block;width:100%}
 .bbar .bnotch .nsurface{fill:var(--white);filter:drop-shadow(0 -2px 3px rgba(17,19,24,.09))}
 /* 四个文字 tab + 中央占位 */
-.bbar .bt{flex:1;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;font-size:7.2px;color:var(--muted);font-weight:500;position:relative;z-index:3}
-.bbar .bt .ic{width:18px;height:18px;stroke-width:1.8}
+.bbar .bt{flex:1;height:calc(48 * var(--u));display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:calc(3 * var(--u));font-size:var(--nav-tab-fs);color:var(--muted);font-weight:500;position:relative;z-index:3}
+.bbar .bt .ic{width:var(--nav-tab-ic);height:var(--nav-tab-ic);stroke-width:1.8}
 .bbar .bt.on{color:var(--royal);font-weight:650}
 .bbar .bt.on .ic{stroke-width:2.2}
-.bbar .bslot{flex:0 0 68px}
-/* 中央按钮与图二一致，半跨顶边并置于下凹缺口中央 */
-.bbar .bagent{position:absolute;left:50%;top:8px;transform:translateX(-50%) translateY(-50%);
-  z-index:4;width:50px;height:50px;display:flex;align-items:center;justify-content:center}
-.bbar .bagent .disc{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;
+.bbar .bslot{flex:0 0 var(--nav-slot)}
+/* 中央按钮：随屏幕缩放，仍半跨顶边并居缺口中央 */
+.bbar .bagent{position:absolute;left:50%;top:calc(8 * var(--u));
+  transform:translateX(-50%) translateY(-50%);
+  z-index:4;width:var(--nav-disc);height:var(--nav-disc);
+  display:flex;align-items:center;justify-content:center}
+.bbar .bagent .disc{display:grid;place-items:center;width:var(--nav-disc);height:var(--nav-disc);border-radius:50%;
   position:relative;z-index:2;background:var(--royal);box-shadow:0 8px 18px -6px rgba(23,26,153,.45)}
-.bbar .bagent .disc .ic{width:22px;height:22px;stroke-width:1.8;color:#fff}
+.bbar .bagent .disc .ic{width:var(--nav-icon);height:var(--nav-icon);stroke-width:1.8;color:#fff}
 .bbar .bagent .disc:active{transform:scale(.94);transition:transform .15s var(--ease)}
 
 /* iOS home indicator */
-.bbar .hind{position:absolute;left:50%;bottom:5px;transform:translateX(-50%);
-  width:96px;height:4px;border-radius:999px;background:rgba(17,19,24,.85);z-index:5}
+.bbar .hind{position:absolute;left:50%;bottom:calc(5 * var(--u));transform:translateX(-50%);
+  width:var(--nav-hind-w);height:var(--nav-hind-h);border-radius:999px;background:rgba(17,19,24,.85);z-index:5}
 /* B 的骨架：无 hairline 分隔，靠留白与投影分区 */
 .bstack{display:flex;flex-direction:column;gap:14px;margin-top:10px}
 .bcard{background:var(--white);border-radius:20px;padding:12px 13px;border:0;
@@ -374,22 +396,23 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 .ctile span{display:block;font-size:6.6px;color:var(--muted)}
 .ctile b{display:block;margin-top:3px;font-size:13px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 
-/* C · 白色上拱导航面，中央黑色圆钮收在 bar 内 */
-.cnav{position:relative;flex:0 0 78px;height:78px;background:transparent}
-.cnav-shape{position:absolute;inset:0;width:100%;height:78px;pointer-events:none}
+/* C · 白色上拱导航面，中央黑色圆钮收在 bar 内（尺寸随 --u 缩放） */
+.cnav{position:relative;flex:0 0 calc(78 * var(--u,1));height:calc(78 * var(--u,1));background:transparent}
+.cnav-shape{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .cnav-shape path{fill:var(--white);filter:drop-shadow(0 -3px 5px rgba(17,19,24,.07))}
-.cnav-items{position:relative;z-index:2;height:62px;padding:17px 5px 0;display:grid;
+.cnav-items{position:relative;z-index:2;height:calc(62 * var(--u,1));padding:calc(17 * var(--u,1)) 5px 0;display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
-.ct{height:42px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;
-  color:var(--muted);font-size:7px;font-weight:500}
-.ct .ic{width:16px;height:16px;stroke-width:1.7}
+.ct{height:calc(42 * var(--u,1));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  gap:calc(3 * var(--u,1));color:var(--muted);font-size:calc(7 * var(--u,1));font-weight:500}
+.ct .ic{width:calc(16 * var(--u,1));height:calc(16 * var(--u,1));stroke-width:1.7}
 .ct.on{color:var(--ink);font-weight:700}
 .ct.on .ic{stroke-width:2.3}
-.cagent{justify-self:center;width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--white);
+.cagent{justify-self:center;width:calc(46 * var(--u,1));height:calc(46 * var(--u,1));border-radius:50%;
+  background:var(--ink);color:var(--white);
   display:grid;place-items:center;box-shadow:0 9px 17px -9px rgba(17,19,24,.65)}
-.cagent .ic{width:22px;height:22px;stroke-width:1.6}
-.chind{position:absolute;z-index:3;left:50%;bottom:6px;transform:translateX(-50%);
-  width:96px;height:3px;border-radius:999px;background:rgba(17,19,24,.18)}
+.cagent .ic{width:calc(22 * var(--u,1));height:calc(22 * var(--u,1));stroke-width:1.6}
+.chind{position:absolute;z-index:3;left:50%;bottom:calc(6 * var(--u,1));transform:translateX(-50%);
+  width:calc(96 * var(--u,1));height:max(3px,calc(3 * var(--u,1)));border-radius:999px;background:rgba(17,19,24,.18)}
 
 /* C2 · 沿用 B2 下凹导航，仅保留首页 / 小安 / 个人并改为黑色 */
 .c2bar .bt.on{color:var(--ink)}
@@ -641,16 +664,16 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
           <!-- B：图二的白色通栏 + 下凹缺口 + 中央扫描圆钮，保留品牌蓝 -->
           <nav class="tabbar b" aria-label="版本 B1 底部导航">
             <div class="bbar v1">
-              <svg class="bnotch" viewBox="0 0 302 76" preserveAspectRatio="none" aria-hidden="true">
+              <svg class="bnotch" viewBox="0 0 375 76" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="notchShade1" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stop-color="#111318" stop-opacity=".075"/>
                     <stop offset="1" stop-color="#111318" stop-opacity="0"/>
                   </linearGradient>
                 </defs>
-                <path class="nsurface" d="M0 12 H102 C124 12 124 42 151 42 C178 42 178 12 200 12 H302 V76 H0 Z"/>
+                <path class="nsurface" d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V76 H0 Z"/>
                 <path class="nshade" fill="url(#notchShade1)"
-                  d="M0 12 H102 C124 12 124 42 151 42 C178 42 178 12 200 12 H302 V48 H0 Z"/>
+                  d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V48 H0 Z"/>
               </svg>
               <div class="bsurface">
                 <span class="bt on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
@@ -733,16 +756,16 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
           </div>
           <nav class="tabbar b" aria-label="版本 B2 底部导航">
             <div class="bbar v2">
-              <svg class="bnotch" viewBox="0 0 302 76" preserveAspectRatio="none" aria-hidden="true">
+              <svg class="bnotch" viewBox="0 0 375 76" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="notchShade2" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stop-color="#111318" stop-opacity=".075"/>
                     <stop offset="1" stop-color="#111318" stop-opacity="0"/>
                   </linearGradient>
                 </defs>
-                <path class="nsurface" d="M0 12 H102 C124 12 124 42 151 42 C178 42 178 12 200 12 H302 V76 H0 Z"/>
+                <path class="nsurface" d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V76 H0 Z"/>
                 <path class="nshade" fill="url(#notchShade2)"
-                  d="M0 12 H102 C124 12 124 42 151 42 C178 42 178 12 200 12 H302 V48 H0 Z"/>
+                  d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V48 H0 Z"/>
               </svg>
               <div class="bsurface">
                 <span class="bt on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
@@ -825,7 +848,7 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
           </div>
 
           <nav class="cnav" aria-label="版本 C 底部导航">
-            <svg class="cnav-shape" viewBox="0 0 302 78" preserveAspectRatio="none" aria-hidden="true"><path d="M0 25 Q151 -10 302 25 V78 H0 Z"/></svg>
+            <svg class="cnav-shape" viewBox="0 0 375 78" preserveAspectRatio="none" aria-hidden="true"><path d="M0 25 Q187.5 -10 375 25 V78 H0 Z"/></svg>
             <div class="cnav-items">
               <span class="ct on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
               <span class="cagent" title="小安"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
@@ -902,16 +925,16 @@ h1{font-size:26px;font-weight:650;letter-spacing:-.03em;margin:0 0 6px}
 
           <nav class="tabbar b" aria-label="版本 C2 底部导航">
             <div class="bbar c2bar">
-              <svg class="bnotch" viewBox="0 0 302 76" preserveAspectRatio="none" aria-hidden="true">
+              <svg class="bnotch" viewBox="0 0 375 76" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="notchShade3" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stop-color="#111318" stop-opacity=".075"/>
                     <stop offset="1" stop-color="#111318" stop-opacity="0"/>
                   </linearGradient>
                 </defs>
-                <path class="nsurface" d="M0 12 H102 C124 12 124 42 151 42 C178 42 178 12 200 12 H302 V76 H0 Z"/>
+                <path class="nsurface" d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V76 H0 Z"/>
                 <path class="nshade" fill="url(#notchShade3)"
-                  d="M0 12 H102 C124 12 124 42 151 42 C178 42 178 12 200 12 H302 V48 H0 Z"/>
+                  d="M0 12 H126 C154 12 154 42 187.5 42 C221 42 221 12 249 12 H375 V48 H0 Z"/>
               </svg>
               <div class="bsurface">
                 <span class="bt on" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>首页</span>
